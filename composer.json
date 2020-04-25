@@ -23,7 +23,8 @@
         "kartik-v/yii2-widget-fileinput": "^1.0",
         "omnilight/yii2-shopping-cart": "*",
         "moonlandsoft/yii2-phpexcel": "*",
-        "kartik-v/yii2-export": "*"
+        "kartik-v/yii2-export": "*",
+        "kartik-v/yii2-krajee-base": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
