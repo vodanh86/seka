@@ -62,7 +62,7 @@ $back_img = null;
 												}
 												endforeach; ?>
 										<?php } else { ?>
-										  <?if(!$category->parent_id){ ?>
+										  <?php if(!$category->parent_id){ ?>
 										    <li><input type="submit" name="choosed_category" class="btn btn-link" value="<?=$category->title ?>"></li>
 										  <?php } ?>
 										<?php } ?>
