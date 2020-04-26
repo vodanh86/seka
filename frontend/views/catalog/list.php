@@ -55,10 +55,12 @@ $back_img = null;
 									<?php foreach($categories as $category): ?>
 									    <?php if($chld_categ = $category->getCategories()->asArray()->all()): ?>
 										    <li><?=$category->title ?></li>
-										    <?php foreach($chld_categ as $chldcategory){
-												if ($chldcategory["id"] != 1) { ?>
+											<?php foreach($chld_categ as $chldcategory): 
+												if ($chldcategory["id"] != 1): ?>
 											    <li><input type="submit" name="choosed_category" class="btn btn-link" value="<?=$chldcategory['title'] ?>"></li>
-											<?php }}?>
+											<?php 
+												endif;
+												endforeach; ?>
 										<?php else: ?>
 										  <?if(!$category->parent_id): ?>
 										    <li><input type="submit" name="choosed_category" class="btn btn-link" value="<?=$category->title ?>"></li>
