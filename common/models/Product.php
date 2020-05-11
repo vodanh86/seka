@@ -17,6 +17,12 @@ use yz\shoppingcart\CartPositionTrait;
  * @property string $description
  * @property string $price
  * @property integer $quantity
+ * @property integer $created_at
+ * @property integer $updated_at
+ * @property string $color
+ * @property string $size
+ * @property integer $new
+ * @property integer $recommend
  *
  * @property OrderItem[] $orderItems
  * @property Brand $brand
@@ -49,11 +55,13 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'brand_id', 'quantity'], 'integer'],
+            [['category_id', 'brand_id', 'quantity', 'created_at', 'updated_at', 'new', 'recommend'], 'integer'],
             [['title'], 'required'],
             [['description'], 'string'],
-            [['price'], 'number'],
+            [['price', 'new'], 'number'],
             [['title'], 'string', 'max' => 30],
+            [['color'], 'string', 'max' => 200],
+            [['size'], 'string', 'max' => 45],
             [['brand_id'], 'exist', 'skipOnError' => true, 'targetClass' => Brand::className(), 'targetAttribute' => ['brand_id' => 'id']],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
@@ -72,8 +80,12 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             'description' => 'Description',
             'price' => 'Price ($)',
             'quantity' => 'Quantity',
-			'created_at' => 'Created At',
+            'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'color' => 'Color',
+            'size' => 'Size',
+            'new' => 'New',
+            'recommend' => 'Recommend',
         ];
     }
 	
@@ -125,7 +137,11 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
     }
 	
 	public static function getProductImagesById($id)
-	{
-	    return ProductImage::find()->where(['product_id' => $id])->asArray()->all();
+    {   $images = ProductImage::find()->where(['product_id' => $id])->asArray()->all();
+        $allImages = array();
+        for($i = 0; $i < 8; $i ++){
+            $allImages = array_merge($allImages, $images);
+        }
+	    return array_slice($allImages, 0, 7); 
 	}
 }

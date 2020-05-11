@@ -24,27 +24,64 @@ $back_img = null;
 		});
 	});
 </script>
-	
-	<div class="banner banner1" style="background-image:url(<?php if($selected_category) echo $selected_category->getCategImgUrl(); else echo \backend\models\SiteSettings::getMainBannerUrl() ?>)">
-		<div class="container">
-			<h2>Great Offers on <span><?php if($selected_category) echo $selected_category->title; else echo 'Electronics' ?></span> Flat <i>35% Discount</i></h2> 
+<section id="slider"><!--slider-->
+		<div >
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
+						
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="col-sm-12 no-padding">
+									<img width="100%" src="<?php echo \backend\models\SiteSettings::getMainBannerUrl() ?>" class="girl img-responsive" alt="" />
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-12 no-padding">
+									<img width="100%" src="<?php echo \backend\models\SiteSettings::getMainBannerUrl() ?>" class="girl img-responsive" alt="" />
+								</div>
+							</div>
+							
+							<div class="item">
+								<div class="col-sm-12 no-padding">
+									<img width="100%" src="<?php echo \backend\models\SiteSettings::getMainBannerUrl() ?>" class="girl img-responsive" alt="" />
+								</div>
+							</div>
+							
+						</div>
+						
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					
+				</div>
+			</div>
 		</div>
-	</div> 
+	</section><!--/slider-->
 	
 	<!-- mobiles -->
 	<div class="mobiles">
-		<div class="container">
+		<div class="">
 			<div class="w3ls_mobiles_grids">
-				<div class="col-md-4 w3ls_mobiles_grid_left">
+				<div class="col-md-3 w3ls_mobiles_grid_left">
 					<div class="w3ls_mobiles_grid_left_grid">
-						<h3>Categories</h3>
+						<h3>Loại sản phẩm</h3>
 						<div class="w3ls_mobiles_grid_left_grid_sub">
 							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 							  <div class="panel panel-default">
 								<div class="panel-heading" role="tab" id="headingOne">
 								  <h4 class="panel-title asd">
 									<a class="pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>New Arrivals
+									  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>
 									</a>
 								  </h4>
 								</div>
@@ -77,7 +114,7 @@ $back_img = null;
 					</div>
 					
 					<div class="w3ls_mobiles_grid_left_grid">
-						<h3>Price</h3>
+						<h3>Giá</h3>
 						<div class="w3ls_mobiles_grid_left_grid_sub">
 							<div class="ecommerce_color ecommerce_size">
 							<?=Html::beginForm(['catalog/list'],'get') ?>
@@ -99,7 +136,7 @@ $back_img = null;
 
 					<div class="w3ls_mobiles_grid_right_grid2">
 						<div class="w3ls_mobiles_grid_right_grid2_left">
-							<h3>Showing Results: 0-<?=$pagination->totalCount ?></h3>
+							<h3>Kết quả: 0-<?=$pagination->totalCount ?></h3>
 						</div>
 						<div class="w3ls_mobiles_grid_right_grid2_right">
 						<?=Html::beginForm(['catalog/list'], 'get') ?>

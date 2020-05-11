@@ -1,103 +1,226 @@
-<?php
-
+<?php 
+use common\models\Product;
+use common\models\Category;
 use yii\helpers\Html;
+use yii\widgets\LinkPager;
 use yii\bootstrap\Modal;
+use frontend\assets\AppAsset;
 
-/* @var $this yii\web\View */
+$this->title = 'Shop';
 
-$this->title = 'My Yii Application';
+AppAsset::register($this);
+$back_img = null;
 ?>
-<!-- banner -->
-	<div class="banner" style="background-image:url(<?=\backend\models\SiteSettings::getMainBannerUrl()?>) ">
-		<div class="container">
-			<h3>Seka, <span>Special Offers</span></h3>
-		</div>
-	</div>
-	<!-- //banner --> 
 	
-	
-	<!-- banner-bottom1 -->
-	<div class="banner-bottom1">
-		<div class="agileinfo_banner_bottom1_grids">
-			<div class="col-md-7 agileinfo_banner_bottom1_grid_left">
-				<h3>Grand Opening Event With flat<span>20% <i>Discount</i></span></h3>
-				<a href="products.html">Shop Now</a>
-			</div>
-			<div class="col-md-5 agileinfo_banner_bottom1_grid_right">
-				<h4>hot deal</h4>
-				<div class="timer_wrap">
-					<div id="counter"> </div>
-				</div>
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-	<!-- //banner-bottom1 --> 
-	
-	<!-- new-products -->
-	<div class="new-products">
-		<div class="container">
-			<h3>New Products</h3>
-			<div class="agileinfo_new_products_grids">
-			    <?php foreach($new_products as $new_product): ?>
-				<div class="col-md-3 agileinfo_new_products_grid">
-					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-						<div class="hs-wrapper hs-wrapper1">
-							<?php foreach(\common\models\Product::getProductImagesById($new_product['id']) as $imgpr): ?>
-							<img src="<?=\common\models\ProductImage::getProductImgUrl($imgpr['id'], $imgpr['product_id'])?>" alt=" " class="img-responsive" />
-							<?php endforeach; ?>
-								
-							<?php Modal::begin([
-							//'header' => '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
-							'toggleButton' => ['label' => '', 'tag' => 'button', 'class' => 'w3_hs_bottom w3_hs_bottom_sub1 glyphicon glyphicon-eye-open'],
-							]);?>
-									
-							<?= $this->render('//catalog/detail', ['model' => $new_product]); ?>
-									
-							<?php Modal::end();?>
-						</div>
-						<h5><a href="#"><?=$new_product['title'] ?></a></h5>
-						<div class="simpleCart_shelfItem">
-							<p><?php if(\Yii::$app->user->isGuest): ?><i class="item_price">$<?=$new_product['price'] ?></i><?php else: ?><span>$<?=$new_product['price'] ?></span> <i class="item_price">$<?=$new_product['price']*0.8 ?></i><?php endif;?></p>
-							<form action="#" method="post">
-								<input type="hidden" name="cmd" value="_cart">
-								<input type="hidden" name="add" value="1"> 
-								<input type="hidden" name="w3ls_item" value="Red Laptop"> 
-								<input type="hidden" name="amount" value="500.00">   
-								<button class="w3ls-cart"><?= Html::a('Add to cart', ['cart/add', 'productId' => $new_product['id']]) ?></button>
-							</form>
-						</div>
-					</div>
-				</div>
-				<?php endforeach; ?>
-				
-				
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<script>
-	function ShowModal(id)
-    {
-        var modal = document.getElementById(id);
-        modal.style.display = "block";
-    }
-	</script>
-	<!-- //new-products -->
-	<!-- top-brands -->
-	<div class="top-brands">
-		<div class="container">
-			<h3>Top Brands</h3>
+	<section id="slider"><!--slider-->
+		<div >
 			<div class="row">
-			
-                <?php foreach($brands as $brand): ?>	
-				
-						<div class="col-xs-2"><?=Html::img($brand->getLogoUrl(), ['class' => 'img-responsive', 'height' => 200]) ?></div>
-						<div class="col-xs-2"><?=$brand->title ?></div>
-				<?php endforeach; ?>	
-
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
+						
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="col-sm-12 no-padding">
+									<img width="100%" src="<?php echo Yii::getAlias('@web')?>/images/home/girl2.jpg" class="girl img-responsive" alt="" />
+								</div>
+							</div>
+							<div class="item">
+								<div class="col-sm-12 no-padding">
+									<img  width="100%"  src="<?php echo Yii::getAlias('@web')?>/images/home/girl1.jpg" class="girl img-responsive" alt="" />
+								</div>
+							</div>
+							
+							<div class="item">
+								<div class="col-sm-12 no-padding">
+									<img  width="100%"  src="<?php echo Yii::getAlias('@web')?>/images/home/girl3.jpg" class="girl img-responsive" alt="" />
+								</div>
+							</div>
+							
+						</div>
+						
+						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					
+				</div>
 			</div>
-			
 		</div>
-	</div>
-	<!-- //top-brands --> 
+	</section><!--/slider-->
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-sm-12 padding-right">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">Sản phẩm mới</h2>
+						<?php 
+						$products = Product::find()
+						->where(['new' => 1])
+						->all();
+						?>
+						<?php foreach($products as $product): ?>
+						<div class="col-md-4 ">
+							<div class="">
+								<div class=" hs-wrapper2">
+									<?php $primage = \common\models\Product::getProductImagesById($product['id']);
+										if (count($primage) > 0) {
+									?>
+									<?=Html::img(\common\models\ProductImage::getProductImgUrl($primage[0]['id'], $primage[0]['product_id'])) ?>
+									<? } ?>
+									<?php Modal::begin([
+									    //'header' => '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
+									    'toggleButton' => ['label' => '', 'tag' => 'button', 'class' => 'w3_hs_bottom w3_hs_bottom_sub1'],
+									]);?>
+									
+									<?= $this->render('../catalog/detail', ['model' => $product]); ?>
+									
+									<?php Modal::end();?>
+								</div>
+								<h5><a href="#"><?=$product['title'] ?></a></h5> 
+								<div class="simpleCart_shelfItem">
+									<p><?php if(\Yii::$app->user->isGuest): ?><i class="item_price">$<?=$product['price'] ?></i><?php else: ?><span>$<?=$product['price'] ?></span> <i class="item_price">$<?=$product['price']*0.8 ?></i><?php endif;?></p>
+									<button class="w3ls-cart"><?= Html::a('Add to cart', ['cart/add', 'productId' => $product['id']]) ?></button>
+								</div> 
+								
+							</div>
+						</div>
+						<?php endforeach; ?>
+						
+					</div><!--features_items-->
+					<?php
+						$categories = Category::find()
+						->where(['<>','id', 1])
+						->all();
+					?>
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<?php 
+								for($i=0; $i < count($categories); $i ++) {
+									$category = $categories[$i];?>
+								<li <?php if ($i == 0) echo " class='active' " ?>><a href="#<?='cat'.$category->id?>" data-toggle="tab"><?=$category->title?></a></li>
+								<? } ?>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<?php 
+							for($i=0; $i < count($categories); $i ++) {
+								$category = $categories[$i];?>
+							
+							<div class="tab-pane fade <?php if ($i == 0) echo " active in " ?>" id="<?='cat'.$category->id?>" >
+							<?php 
+							$products = Product::find()
+							->where(['category_id' => $category->id])
+							->all();
+							?>
+							<?php foreach($products as $product): ?>
+								<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
+									<div class="agile_ecommerce_tab_left mobiles_grid">
+										<div class="hs-wrapper hs-wrapper2">
+											<?php foreach(\common\models\Product::getProductImagesById($product['id']) as $primage): ?>
+											<?=Html::img(\common\models\ProductImage::getProductImgUrl($primage['id'], $primage['product_id']), ['class' => 'img-responsive']) ?>
+											<?php endforeach; ?>
+											
+											<?php Modal::begin([
+												//'header' => '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
+												'toggleButton' => ['label' => '', 'tag' => 'button', 'class' => 'w3_hs_bottom w3_hs_bottom_sub1 glyphicon glyphicon-eye-open'],
+											]);?>
+											
+											<?= $this->render('../catalog/detail', ['model' => $product]); ?>
+											
+											<?php Modal::end();?>
+										</div>
+										<h5><a href="#"><?=$product['title'] ?></a></h5> 
+										<div class="simpleCart_shelfItem">
+											<p><?php if(\Yii::$app->user->isGuest): ?><i class="item_price">$<?=$product['price'] ?></i><?php else: ?><span>$<?=$product['price'] ?></span> <i class="item_price">$<?=$product['price']*0.8 ?></i><?php endif;?></p>
+											<button class="w3ls-cart"><?= Html::a('Add to cart', ['cart/add', 'productId' => $product['id']]) ?></button>
+										</div> 
+										
+									</div>
+								</div>
+								<?php endforeach; ?>
+							</div>
+
+							<?php } ?>
+						</div>
+					</div><!--/category-tab-->
+					
+					<div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">Sản phẩm bán chạy</h2>
+						
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<?php 
+									$products = Product::find()
+									->where(['recommend' => 1])
+									->all();
+									$allProducts = Array();
+									for ($i=0; $i < 6; $i ++){
+										$allProducts = array_merge($allProducts, $products);
+									}
+								?>
+								<div class="item active">	
+									<?php for ($i=0; $i < 3; $i ++){ 
+										$product = $allProducts[$i] ?>
+										<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
+											<div class="agile_ecommerce_tab_left mobiles_grid">
+												<div class="hs-wrapper hs-wrapper2">
+													<?php foreach(\common\models\Product::getProductImagesById($product['id']) as $primage): ?>
+													<?=Html::img(\common\models\ProductImage::getProductImgUrl($primage['id'], $primage['product_id'])) ?>
+													<?php endforeach; ?>
+													
+												</div>
+												<h5><a href="#"><?=$product['title'] ?></a></h5> 
+												<div class="simpleCart_shelfItem">
+													<p><?php if(\Yii::$app->user->isGuest): ?><i class="item_price">$<?=$product['price'] ?></i><?php else: ?><span>$<?=$product['price'] ?></span> <i class="item_price">$<?=$product['price']*0.8 ?></i><?php endif;?></p>
+													<button class="w3ls-cart"><?= Html::a('Add to cart', ['cart/add', 'productId' => $product['id']]) ?></button>
+												</div> 
+												
+											</div>
+										</div>
+									<?php } ?>
+								</div>
+								<div class="item">	
+								<?php for ($i=3; $i < 6; $i ++){
+									$product = $allProducts[$i] ?>
+										<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
+											<div class="agile_ecommerce_tab_left mobiles_grid">
+												<div class="hs-wrapper hs-wrapper2">
+													<?php foreach(\common\models\Product::getProductImagesById($product['id']) as $primage): ?>
+													<?=Html::img(\common\models\ProductImage::getProductImgUrl($primage['id'], $primage['product_id'])) ?>
+													<?php endforeach; ?>
+												</div>
+												<h5><a href="#"><?=$product['title'] ?></a></h5> 
+												<div class="simpleCart_shelfItem">
+													<p><?php if(\Yii::$app->user->isGuest): ?><i class="item_price">$<?=$product['price'] ?></i><?php else: ?><span>$<?=$product['price'] ?></span> <i class="item_price">$<?=$product['price']*0.8 ?></i><?php endif;?></p>
+													<button class="w3ls-cart"><?= Html::a('Add to cart', ['cart/add', 'productId' => $product['id']]) ?></button>
+												</div> 
+												
+											</div>
+										</div>
+									<?php } ?>
+								</div>
+							</div>
+							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							  </a>
+							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							  </a>			
+						</div>
+					</div><!--/recommended_items-->
+					
+				</div>
+			</div>
+		</div>
+	</section>
