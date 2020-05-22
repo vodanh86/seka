@@ -69,6 +69,27 @@ class UserController extends Controller
         ]);
     }
 
+        /**
+     * Creates a new Menu model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new User();
+
+        if ($model->load(Yii::$app->request->post())){
+            $model->generateAuthKey();
+            $model->setPassword($model["password"]);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
    
 
     /**
@@ -81,8 +102,14 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()))
+        { 
+            $model->generateAuthKey();
+            $model->setPassword($model["password"]);
+            if($model->save()) 
+            {
             return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -15,6 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     
+    <p>
+        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -50,6 +54,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 			'username',
             'email:email',
+            [
+                'attribute' => 'role',
+				'filter' => array(\common\models\User::ROLE_ADMIN => 'Admin', \common\models\User::ROLE_USER => 'User', \common\models\User::ROLE_CUSTOMER => 'Customer'),
+				'value' => function($model){
+					switch($model['role']){
+                        case \common\models\User::ROLE_ADMIN : return 'Admin'; break;
+					    case \common\models\User::ROLE_USER : return 'User'; break;
+					    case \common\models\User::ROLE_CUSTOMER : return 'Customer'; break;
+					}
+				}
+			],
             [
                 'attribute' => 'status',
 				'filter' => array(\common\models\User::STATUS_ACTIVE => 'Active', \common\models\User::STATUS_DELETED => 'Banned'),

@@ -51,6 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'price',
             'quantity',
+            'new',
+            'recommend',
 			[
 			    'format' => ['date', 'dd.MM.Y'],
                 'attribute' => 'created_at',

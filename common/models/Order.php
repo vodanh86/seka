@@ -29,10 +29,15 @@ class Order extends \yii\db\ActiveRecord
 {
 	//order status
 	const STATUS_NEW = 0;
-	const STATUS_PAID = 1;
-	const STATUS_SHIPPING = 2;
-	const STATUS_DONE = 3;
-	const STATUS_CANCELLED = 5;
+	const STATUS_WAIT_CONFIRM = 1;
+	const STATUS_CONFIRM = 2;
+	const STATUS_ORDER = 3;
+	const STATUS_CHINA_STORE = 4;
+	const STATUS_VIETNAM_STORE = 5;
+    const STATUS_PARTIAL_SHIP = 6;
+    const STATUS_SHIP = 7;
+    const STATUS_BILL = 8;
+	const STATUS_CANCEL = 9;
 	
 	//customer type
 	const GUEST = 0;
@@ -60,7 +65,7 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             ['status', 'default', 'value' => self::STATUS_NEW],
-			['status', 'in', 'range' => [self::STATUS_NEW, self::STATUS_PAID, self::STATUS_SHIPPING, self::STATUS_DONE, self::STATUS_CANCELLED]],
+			['status', 'in', 'range' => [self::STATUS_NEW, self::STATUS_WAIT_CONFIRM, self::STATUS_CONFIRM, self::STATUS_ORDER, self::STATUS_CHINA_STORE, self::STATUS_VIETNAM_STORE, self::STATUS_PARTIAL_SHIP, self::STATUS_SHIP, self::STATUS_BILL, self::STATUS_CANCEL]],
             [['address', 'notes'], 'string'],
             [['user_id'], 'integer'],
             ['customer_type', 'default', 'value' => self::GUEST],

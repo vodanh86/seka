@@ -55,11 +55,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
 				'value' => function($model){
 					switch($model['status']){
-						case \common\models\Order::STATUS_NEW : return 'New'; break;
-						case \common\models\Order::STATUS_PAID : return 'Paid'; break;
-						case \common\models\Order::STATUS_SHIPPING : return 'In shipping'; break;
-						case \common\models\Order::STATUS_DONE : return 'Done'; break;
-						case \common\models\Order::STATUS_CANCELLED : return 'Cancelled'; break;
+                        case \common\models\Order::STATUS_NEW  : return  'Mới'; break;
+                        case \common\models\Order::STATUS_WAIT_CONFIRM  : return  'Chờ xác nhận'; break;
+                        case \common\models\Order::STATUS_CONFIRM  : return  'Đã xác nhận'; break;
+                        case \common\models\Order::STATUS_ORDER  : return  'Đã order'; break;
+                        case \common\models\Order::STATUS_CHINA_STORE  : return  'Hàng về kho Trung Quốc'; break;
+                        case \common\models\Order::STATUS_VIETNAM_STORE  : return  'Hàng về kho Việt Nam'; break;
+                        case \common\models\Order::STATUS_PARTIAL_SHIP  : return  'Hàng giao 1 phần'; break; 
+                        case \common\models\Order::STATUS_SHIP  : return  'Hàng đã giao'; break;   
+                        case \common\models\Order::STATUS_BILL  : return  'Đã xuất hoá đơn'; break;
+                        case \common\models\Order::STATUS_CANCEL  : return  'Đã huỷ đơn'; break;
 					}
 				}
 			],

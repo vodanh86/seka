@@ -60,14 +60,30 @@ $this->params['breadcrumbs'][] = $this->title;
 		'email:email',
 		[
 			'attribute' => 'status',
-			'filter' => array(\common\models\Order::STATUS_NEW => 'New', \common\models\Order::STATUS_PAID => 'Paid', \common\models\Order::STATUS_SHIPPING => 'In shipping', \common\models\Order::STATUS_DONE => 'Done', \common\models\Order::STATUS_CANCELLED => 'Cancelled'),
+			'filter' => array(
+				\common\models\Order::STATUS_NEW => 'Mới', 
+				\common\models\Order::STATUS_WAIT_CONFIRM => 'Chờ xác nhận',
+				\common\models\Order::STATUS_CONFIRM => 'Đã xác nhận', 
+				\common\models\Order::STATUS_ORDER => 'Đã order',
+				\common\models\Order::STATUS_CHINA_STORE => 'Hàng về kho Trung Quốc', 
+				\common\models\Order::STATUS_VIETNAM_STORE => 'Hàng về kho Việt Nam',
+				\common\models\Order::STATUS_PARTIAL_SHIP => 'Hàng giao 1 phần', 
+				\common\models\Order::STATUS_SHIP => 'Hàng đã giao',   
+				\common\models\Order::STATUS_BILL => 'Đã xuất hoá đơn', 
+				\common\models\Order::STATUS_CANCEL => 'Đã huỷ đơn',
+			),
 			'value' => function($model){
 				switch($model['status']){
-					case \common\models\Order::STATUS_NEW : return 'New'; break;
-					case \common\models\Order::STATUS_PAID : return 'Paid'; break;
-					case \common\models\Order::STATUS_SHIPPING : return 'In shipping'; break;
-					case \common\models\Order::STATUS_DONE : return 'Done'; break;
-					case \common\models\Order::STATUS_CANCELLED : return 'Cancelled'; break;
+					case \common\models\Order::STATUS_NEW  : return  'Mới'; break;
+					case \common\models\Order::STATUS_WAIT_CONFIRM  : return  'Chờ xác nhận'; break;
+					case \common\models\Order::STATUS_CONFIRM  : return  'Đã xác nhận'; break;
+					case \common\models\Order::STATUS_ORDER  : return  'Đã order'; break;
+					case \common\models\Order::STATUS_CHINA_STORE  : return  'Hàng về kho Trung Quốc'; break;
+					case \common\models\Order::STATUS_VIETNAM_STORE  : return  'Hàng về kho Việt Nam'; break;
+					case \common\models\Order::STATUS_PARTIAL_SHIP  : return  'Hàng giao 1 phần'; break; 
+					case \common\models\Order::STATUS_SHIP  : return  'Hàng đã giao'; break;   
+					case \common\models\Order::STATUS_BILL  : return  'Đã xuất hoá đơn'; break;
+					case \common\models\Order::STATUS_CANCEL  : return  'Đã huỷ đơn'; break;
 				}
 			}
 		],

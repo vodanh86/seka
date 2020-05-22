@@ -1,0 +1,2 @@
+[07-May-2020 15:58:10 UTC] PHP Fatal error:  Cannot use yii\base\Object as Object because 'Object' is a special class name in /home/m8lqtzyk3w47/public_html/seka/vendor/omnilight/yii2-shopping-cart/CartPositionTrait.php on line 6
+[07-May-2020 16:00:04 UTC] PHP Fatal error:  Cannot use yii\base\Object as Object because 'Object' is a special class name in /home/m8lqtzyk3w47/public_html/seka/vendor/omnilight/yii2-shopping-cart/CartPositionTrait.php on line 6

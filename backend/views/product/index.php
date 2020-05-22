@@ -72,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				}
 			],
             'title',
+            'new',
             // 'price',
             // 'quantity',
 

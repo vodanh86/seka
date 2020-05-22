@@ -43,7 +43,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find()->where(['role' => User::ROLE_USER]);
+        $query = User::find()->where((['<>','role', User::ROLE_ADMIN]));
 
         // add conditions that should always apply here
 
