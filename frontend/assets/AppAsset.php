@@ -14,7 +14,6 @@ class AppAsset extends AssetBundle
     public $css = [
         //'css/site.css',
 		'css/style.css',
-		'css/bootstrap1.css',
 		'css/fasthover.css',
 		'css/flexslider.css',
 		'css/jquery.countdown.css',
@@ -28,7 +27,6 @@ class AppAsset extends AssetBundle
 	];
 	
     public $js = [
-		'js/jquery.min.js',
 		'js/easyResponsiveTabs.js',
 		'js/imagezoom.js',
 		'js/jquery.magnific-popup.js',
@@ -47,7 +45,6 @@ class AppAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
 	];
 	public $jsOptions = array(
 		'position' => \yii\web\View::POS_HEAD
