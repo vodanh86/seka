@@ -12,8 +12,7 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use common\models\Menu;
 use yii\helpers\Url;
-
-
+use yii\bootstrap\Modal;
 
 AppAsset::register($this);
 
@@ -45,72 +44,51 @@ $cart = \Yii::$app->session;
 				</div>
 			</div>
 		</div><!--/header_top-->
-            <!-- header modal -->
-            <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                &times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Don't Wait, Login now!</h4>
+        <?php                 
 
-                        </div>
+            Modal::begin([
+                    'header' => "Don't Wait, Login now!",
+                    'id' => 'myModal88',
+                    'size' => 'modal-md',
+                ]);?>
                         <div class="modal-body modal-body-sub">
                             <div class="row">
-                                <div class="col-md-8 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em;">
+                                <div class="col-md-6 modal_body_left modal_body_left1" style="border-right: 1px dotted #C2C2C2;padding-right:3em;">
                                     <div class="sap_tabs">	
                                         <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
                                             <ul>
                                             <?php if (Yii::$app->user->isGuest): ?>
                                                 <li class="resp-tab-item" aria-controls="tab_item-0"><?=Html::a('<span>Sign in</span>', ['site/login']) ?></li>
-                                                <li class="resp-tab-item" aria-controls="tab_item-1"><?=Html::a('<span>Sign up</span>', ['site/signup']) ?></li>
                                             <?php else: ?>
                                                 <li class="resp-tab-item" aria-controls="tab_item-1">
                                                 <?= Html::beginForm(['/site/logout'], 'post') . Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']). Html::endForm() ?>
                                                 </li>
                                             <?php endif; ?>
-                                            </ul>		
-                                            
-                                                                                                    
+                                            </ul>		                                                                   
                                         </div>	
                                     </div>
-                                    <script src="/shop/frontend/web/js/easyResponsiveTabs.js" type="text/javascript"></script>
-                                    <?php $this->registerJs('
-                                        $(document).ready(function () {
-                                            $("#horizontalTab").easyResponsiveTabs({
-                                                type: "default", //Types: default, vertical, accordion           
-                                                width: "auto", //auto or any width like 600px
-                                                fit: true   // 100% fit in a container
-                                            });
-                                        });
-                                    '); ?>
-                                    <div id="OR" class="hidden-xs">OR</div>
+                                     <div id="OR" class="hidden-xs">OR</div>
                                 </div>
-                                <div class="col-md-4 modal_body_right modal_body_right1">
+                                <div class="col-md-6 modal_body_right modal_body_right1">
                                     <div class="row text-center sign-with">
                                         <div class="col-md-12">
-                                            <h3 class="other-nw">Sign in with</h3>
+                                            <h3 class="other-nw">
+                                                Liên hệ hotline ... hoặc fb ... để được tư vấn"</h3>
                                         </div>
                                         <div class="col-md-12">
-                                            <ul class="social">
-                                                <li class="social_facebook"><a href="#" class="fa fa-facebook"></a></li>
-                                                <li class="social_dribbble"><a href="#" class="fa fa-dribbble"></a></li>
-                                                <li class="social_twitter"><a href="#" class="fa fa-twitter"></a></li>
-                                                <li class="social_behance"><a href="#" class="fa fa-behance"></a></li>
-                                            </ul>
                                         </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </div>         
+            <?php
+                Modal::end();
+            ?>
+           
             <?php if (Yii::$app->user->isGuest && !isset($hide) && (Yii::$app->controller->action->id != "login" && Yii::$app->controller->action->id != "signup")) {?>
-            <script>
-                $('#myModal88').modal('show');
-            </script>  
+            <?php $this->registerJs("
+                            $('#myModal88').modal('show');
+                        "); ?>
             <?php } ?>
             <!-- //header modal -->
             

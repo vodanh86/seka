@@ -182,26 +182,20 @@ $back_img = null;
 					</div>
 					<div class="w3ls_mobiles_grid_right_grid3">
 					<?php foreach($model as $product): ?>
-						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_mobiles">
-							<div class="agile_ecommerce_tab_left mobiles_grid">
-								<div class="hs-wrapper hs-wrapper2">
-								    <?php foreach(\common\models\Product::getProductImagesById($product['id']) as $primage): ?>
-									<?=Html::img(\common\models\ProductImage::getProductImgUrl($primage['id'], $primage['product_id']), ['class' => 'img-responsive']) ?>
-									<?php endforeach; ?>
+						<div class="col-md-4 ">
+								<div class="">
+									<div class=" hs-wrapper2">
+									<a href="catalog/view?id=<?= $product['id']?>">
+									<?php $primage = \common\models\Product::getProductImagesById($product['id']);
+										if (count($primage) > 0) {
+									?>
+									<?=Html::img(\common\models\ProductImage::getProductImgUrl($primage[0]['id'], $primage[0]['product_id'])) ?>
+									<? } ?>
 									
-									<?php Modal::begin([
-									    //'header' => '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
-									    'toggleButton' => ['label' => '', 'tag' => 'button', 'class' => 'w3_hs_bottom w3_hs_bottom_sub1 glyphicon glyphicon-eye-open'],
-									]);?>
-									
-									<?= $this->render('detail', ['model' => $product]); ?>
-									
-									<?php Modal::end();?>
 								</div>
-								<h5><a href="#"><?=$product['title'] ?></a></h5> 
+								<h5><?=$product['title'] ?></h5> </a>
 								<div class="simpleCart_shelfItem">
 									<p><?php if(\Yii::$app->user->isGuest): ?><i class="item_price">$<?=$product['price'] ?></i><?php else: ?><span>$<?=$product['price'] ?></span> <i class="item_price">$<?=$product['price']*0.8 ?></i><?php endif;?></p>
-									<button class="w3ls-cart"><?= Html::a('Add to cart', ['cart/add', 'productId' => $product['id']]) ?></button>
 								</div> 
 								
 							</div>

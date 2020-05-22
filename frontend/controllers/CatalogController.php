@@ -88,7 +88,15 @@ class CatalogController extends Controller
 	}
 	
 	
-	
+   public function actionView($id)
+   {
+		$model = Product::findOne($id);
+	   
+	   return $this->render('detail', [
+		   'model' => $model,
+	   ]);
+   }
+
 	
 	
 }

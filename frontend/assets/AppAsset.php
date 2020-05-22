@@ -31,7 +31,6 @@ class AppAsset extends AssetBundle
 		'js/imagezoom.js',
 		'js/jquery.magnific-popup.js',
 		'js/jquery.wmuSlider.js',
-		'js/bootstrap-3.1.1.min.js',
 		'js/minicart.js',
 		'js/jquery.js',
 		'js/jquery.flexisel.js',
