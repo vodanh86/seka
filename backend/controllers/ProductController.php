@@ -13,7 +13,7 @@ use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use cakebake\actionlog\model\ActionLog;
 /**
  * ProductController implements the CRUD actions for Product model.
  */
@@ -107,6 +107,7 @@ class ProductController extends Controller
         $model = new Product();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            ActionLog::add('create product', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -126,6 +127,7 @@ class ProductController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            ActionLog::add('update product', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -143,7 +145,7 @@ class ProductController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        ActionLog::add('delete product', Yii::$app->user->identity->username);
         return $this->redirect(['index']);
     }
 

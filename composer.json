@@ -12,7 +12,8 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "~2.0.6",
@@ -24,7 +25,9 @@
         "omnilight/yii2-shopping-cart": "*",
         "moonlandsoft/yii2-phpexcel": "*",
         "kartik-v/yii2-export": "*",
-        "kartik-v/yii2-krajee-base": "*"
+        "kartik-v/yii2-krajee-base": "*",
+        "yii2mod/yii2-rbac": "*",
+        "cakebake/yii2-actionlog": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

@@ -15,6 +15,8 @@ class CatalogController extends Controller
 {
 	public function actionList()
 	{
+
+		echo var_dump(Yii::$app->request->post('created_at'));
 	    $prodQuery = Product::find()->where(['not',['quantity'=>0]]);
 		
 		//$selected_category = 'Electronics';
@@ -23,6 +25,22 @@ class CatalogController extends Controller
 		//global search
 		if($gsearch = Yii::$app->request->get('gsearch')){
 		    $prodQuery->andFilterWhere(['like', 'title', $gsearch])->orFilterWhere(['like', 'description', $gsearch]);
+		}
+
+		if($title = Yii::$app->request->post('title')){
+		    $prodQuery->andFilterWhere(['like', 'title', $title]);
+		}
+
+		if($created_at = Yii::$app->request->post('created_at')){
+		    $prodQuery->andFilterWhere(['between', 'created_at', strtotime($created_at), strtotime($created_at) + 86400]);
+		}
+
+		if($updated_at = Yii::$app->request->post('updated_at')){
+		    $prodQuery->andFilterWhere(['between', 'updated_at', strtotime($updated_at), strtotime($updated_at) + 86400]);
+		}
+
+		if($product_code = Yii::$app->request->post('product_code')){
+		    $prodQuery->andFilterWhere(['like', 'product_code', $product_code]);
 		}
 		
 		//menu

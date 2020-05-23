@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				}
 			],
             'title',
+            'product_code',
             'description:ntext',
             'price',
             'quantity',

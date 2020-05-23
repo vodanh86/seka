@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use cakebake\actionlog\model\ActionLog;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -82,6 +83,7 @@ class UserController extends Controller
             $model->generateAuthKey();
             $model->setPassword($model["password"]);
             if ($model->save()) {
+                ActionLog::add('create user', Yii::$app->user->identity->username);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
@@ -108,6 +110,7 @@ class UserController extends Controller
             $model->setPassword($model["password"]);
             if($model->save()) 
             {
+            ActionLog::add('udate user', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -126,7 +129,7 @@ class UserController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        ActionLog::add('delete user', Yii::$app->user->identity->username);
         return $this->redirect(['index']);
     }
 

@@ -18,6 +18,7 @@ use Yii;
  * @property integer $updated_at
  * @property string $color
  * @property string $size
+ * @property string $product_code
  * @property integer $new
  * @property integer $recommend
  *
@@ -45,6 +46,7 @@ class Product extends \yii\db\ActiveRecord
             [['category_id', 'brand_id', 'quantity', 'created_at', 'updated_at', 'new', 'recommend'], 'integer'],
             [['title'], 'required'],
             [['description'], 'string'],
+            [['product_code'], 'string'],
             [['price', 'new'], 'number'],
             [['title'], 'string', 'max' => 30],
             [['color'], 'string', 'max' => 200],
@@ -66,6 +68,7 @@ class Product extends \yii\db\ActiveRecord
             'title' => 'Title',
             'description' => 'Description',
             'price' => 'Price',
+            'product_code' => 'Product Code',
             'quantity' => 'Quantity',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

@@ -8,6 +8,7 @@ use common\models\MenuSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use cakebake\actionlog\model\ActionLog;
 
 /**
  * MenuController implements the CRUD actions for Menu model.
@@ -67,6 +68,7 @@ class MenuController extends Controller
         $model = new Menu();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            ActionLog::add('create menu', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -87,6 +89,7 @@ class MenuController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            ActionLog::add('update menu', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -105,7 +108,7 @@ class MenuController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        ActionLog::add('delete menu', Yii::$app->user->identity->username);
         return $this->redirect(['index']);
     }
 

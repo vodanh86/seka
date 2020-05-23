@@ -11,6 +11,7 @@ use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use cakebake\actionlog\model\ActionLog;
 
 /**
  * BrandController implements the CRUD actions for Brand model.
@@ -95,7 +96,8 @@ class BrandController extends Controller
     {
         $model = new Brand();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {          
+            ActionLog::add('create brand', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -115,6 +117,7 @@ class BrandController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            ActionLog::add('update brand', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -132,7 +135,7 @@ class BrandController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        ActionLog::add('delete brand', Yii::$app->user->identity->username);
         return $this->redirect(['index']);
     }
 

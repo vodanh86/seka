@@ -11,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use cakebake\actionlog\model\ActionLog;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -97,6 +98,7 @@ class CategoryController extends Controller
 		$categories = Category::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            ActionLog::add('create category', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -116,6 +118,7 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            ActionLog::add('update brand', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -133,7 +136,7 @@ class CategoryController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        ActionLog::add('delete category', Yii::$app->user->identity->username);
         return $this->redirect(['index']);
     }
 	

@@ -34,19 +34,31 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    $navMenus = [
+	    ['label' => 'Role', 'url' => ['/rbac/role']],
+        ['label' => 'Route', 'url' => ['/rbac/route']],
+		['label' => 'Permission', 'url' => ['/rbac/permission']],
+		['label' => 'Assignment', 'url' => ['/rbac/assignment']],
+    ];
     $menuItems = [
 	    ['label' => 'Website', 'url' => '/frontend/web'],
         ['label' => 'Home', 'url' => ['/site/index']],
-		['label' => 'Accounts', 'url' => ['/user/index']],
-		['label' => 'Brands', 'url' => ['/brand/index']],
-		['label' => 'Categories', 'url' => ['/category/index']],
-		['label' => 'Products', 'url' => ['/product/index']],
-        ['label' => 'Orders', 'url' => ['/order/index']],
-        ['label' => 'Menu', 'url' => ['/menu/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems = [
+            ['label' => 'Website', 'url' => '/frontend/web'],
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Role', "items" => $navMenus],
+            ['label' => 'Log', 'url' => ['/actionlog/log/index']],
+            ['label' => 'Accounts', 'url' => ['/user/index']],
+            ['label' => 'Brands', 'url' => ['/brand/index']],
+            ['label' => 'Categories', 'url' => ['/category/index']],
+            ['label' => 'Products', 'url' => ['/product/index']],
+            ['label' => 'Orders', 'url' => ['/order/index']],
+            ['label' => 'Menu', 'url' => ['/menu/index']],
+        ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

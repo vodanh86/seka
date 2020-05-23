@@ -10,7 +10,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use cakebake\actionlog\model\ActionLog;
 /**
  * OrderController implements the CRUD actions for Order model.
  */
@@ -88,6 +88,7 @@ class OrderController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            ActionLog::add('update order', Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -105,7 +106,7 @@ class OrderController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        ActionLog::add('delete order', Yii::$app->user->identity->username);
         return $this->redirect(['index']);
     }
 

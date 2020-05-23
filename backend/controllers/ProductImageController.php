@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use cakebake\actionlog\model\ActionLog;
 /**
  * ProductImageController implements the CRUD actions for ProductImage model.
  */

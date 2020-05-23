@@ -9,7 +9,7 @@ use common\models\LoginForm;
 use backend\models\SiteSettings;
 use yii\web\UploadedFile;
 use backend\models\UploadForm;
-
+use cakebake\actionlog\model\ActionLog;
 /**
  * Site controller
  */

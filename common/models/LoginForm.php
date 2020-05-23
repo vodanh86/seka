@@ -3,6 +3,7 @@ namespace common\models;
 
 use Yii;
 use yii\base\Model;
+use cakebake\actionlog\model\ActionLog;
 
 /**
  * Login form
@@ -56,6 +57,7 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
+            ActionLog::add('success', $this->username); //log message for success
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         } else {
             return false;
@@ -66,6 +68,7 @@ class LoginForm extends Model
 	public function loginAdmin()
     {
         if ($this->validate() && User::isUserAdmin($this->username)) {
+            ActionLog::add('success', $this->username); //log message for success
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         } else {
             return false;

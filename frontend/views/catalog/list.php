@@ -3,13 +3,14 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use yii\bootstrap\Modal;
+use yii\widgets\ActiveForm;
 use frontend\assets\AppAsset;
-
+use common\models\ProductSearchForm;
+use dosamigos\datepicker\DatePicker;
 $this->title = 'Catalog';
 
 AppAsset::register($this);
 $back_img = null;
-
 
 
 ?>
@@ -131,7 +132,69 @@ $back_img = null;
 					</div>
 				</div>
 				<div class="col-md-8 w3ls_mobiles_grid_right">
-					
+					<div class="w3ls_mobiles_grid_right_grid2">
+					<?php
+
+					//$form = ActiveForm::begin(); //Default Active Form begin
+					$form = ActiveForm::begin([
+						'id' => 'active-form',
+						'options' => [
+							'class' => 'form-horizontal',
+							'enctype' => 'multipart/form-data'
+						],
+					])?>
+						<div class="row">
+							<div class="col-md-2">
+							Ngày đăng
+							</div>
+							<div class="col-md-4">
+
+								<?= DatePicker::widget([
+									'name' => 'created_at',
+									'template' => '{addon}{input}',
+										'clientOptions' => [
+											'autoclose' => true,
+											'format' => 'yyyy-mm-dd'
+										]
+								]);?>
+							</div>
+							<div class="col-md-2">
+							Ngày chốt
+							</div>
+							<div class="col-md-4">
+
+								<?= DatePicker::widget([
+									'name' => 'updated_at',
+									'template' => '{addon}{input}',
+										'clientOptions' => [
+											'autoclose' => true,
+											'format' => 'dd-M-yyyy'
+										]
+								]);?>
+							</div>
+						</div>
+					<div class="row">
+						<div class="col-md-2">
+							Mã sản phẩm
+						</div>
+						<div class="col-md-4">
+						<?= Html::input('text','product_code','', $options=['class'=>'form-control', 'maxlength'=>100]) ?>
+
+						</div>
+						<div class="col-md-2">
+						Tên sản phẩm</div>
+						<div class="col-md-4">
+						<?= Html::input('text','title','', $options=['class'=>'form-control', 'maxlength'=>100]) ?>
+
+						</div>
+						</div>
+					</div>
+
+					<?php
+					echo Html::submitButton('Search', ['class' => 'btn btn-primary']);
+					/* ADD FORM FIELDS */
+					ActiveForm::end();
+					?>
 					<div class="clearfix"> </div>
 
 					<div class="w3ls_mobiles_grid_right_grid2">

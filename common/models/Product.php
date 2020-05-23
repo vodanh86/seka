@@ -14,6 +14,7 @@ use yz\shoppingcart\CartPositionTrait;
  * @property integer $category_id
  * @property integer $brand_id
  * @property string $title
+ * @property string $product_code
  * @property string $description
  * @property string $price
  * @property integer $quantity
@@ -57,6 +58,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
         return [
             [['category_id', 'brand_id', 'quantity', 'created_at', 'updated_at', 'new', 'recommend'], 'integer'],
             [['title'], 'required'],
+            [['product_code'], 'string'],
             [['description'], 'string'],
             [['price', 'new'], 'number'],
             [['title'], 'string', 'max' => 30],
@@ -77,6 +79,7 @@ class Product extends \yii\db\ActiveRecord implements CartPositionInterface
             'category_id' => 'Category ID',
             'brand_id' => 'Brand ID',
             'title' => 'Title',
+            'product_code' => 'Product Code',
             'description' => 'Description',
             'price' => 'Price ($)',
             'quantity' => 'Quantity',

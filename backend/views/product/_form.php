@@ -23,6 +23,8 @@ $brands = \common\models\Brand::find()->all();
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'product_code')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'description')->widget(TinyMce::className(), [
         'options' => ['rows' => 6],
         'language' => 'en',

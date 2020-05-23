@@ -72,6 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
 				}
 			],
             'title',
+            'product_code',
             'new',
             // 'price',
             // 'quantity',
