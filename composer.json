@@ -27,7 +27,8 @@
         "kartik-v/yii2-export": "*",
         "kartik-v/yii2-krajee-base": "*",
         "yii2mod/yii2-rbac": "*",
-        "cakebake/yii2-actionlog": "*"
+        "cakebake/yii2-actionlog": "*",
+        "yii2tech/spreadsheet": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

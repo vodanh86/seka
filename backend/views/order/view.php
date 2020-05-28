@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'address:ntext',
             'zip_code',
             'phone',
+            'payment_method',
             'email:email',
             'notes:ntext',
 			[

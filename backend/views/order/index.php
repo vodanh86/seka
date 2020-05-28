@@ -57,6 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'user_id',
 		'surname',
 		'name',
+		'payment_method',
 		'email:email',
 		[
 			'attribute' => 'status',

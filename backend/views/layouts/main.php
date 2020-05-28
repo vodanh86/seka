@@ -56,6 +56,7 @@ AppAsset::register($this);
             ['label' => 'Brands', 'url' => ['/brand/index']],
             ['label' => 'Categories', 'url' => ['/category/index']],
             ['label' => 'Products', 'url' => ['/product/index']],
+            ['label' => 'Reports', 'url' => ['/order/report']],
             ['label' => 'Orders', 'url' => ['/order/index']],
             ['label' => 'Menu', 'url' => ['/menu/index']],
         ];

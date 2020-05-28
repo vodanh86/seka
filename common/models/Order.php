@@ -22,6 +22,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $email
  * @property string $notes
  * @property string $status
+ * @property string $payment_method
+ * @property string $other_payment_method
  *
  * @property OrderItem[] $orderItems
  */
@@ -37,7 +39,14 @@ class Order extends \yii\db\ActiveRecord
     const STATUS_PARTIAL_SHIP = 6;
     const STATUS_SHIP = 7;
     const STATUS_BILL = 8;
-	const STATUS_CANCEL = 9;
+    const STATUS_CANCEL = 9;
+    
+    const PAYMENT_CASH = "Tiền mặt";
+    const PAYMENT_TRANSFER = "Chuyển khoản";
+    const PAYMENT_COD_GHTK = "COD GHTK";
+    const PAYMENT_CODE_SHOPEE = "COD SHOPEE";
+    const PAYMENT_TEXT = "Khác";
+
 	
 	//customer type
 	const GUEST = 0;
@@ -66,7 +75,7 @@ class Order extends \yii\db\ActiveRecord
         return [
             ['status', 'default', 'value' => self::STATUS_NEW],
 			['status', 'in', 'range' => [self::STATUS_NEW, self::STATUS_WAIT_CONFIRM, self::STATUS_CONFIRM, self::STATUS_ORDER, self::STATUS_CHINA_STORE, self::STATUS_VIETNAM_STORE, self::STATUS_PARTIAL_SHIP, self::STATUS_SHIP, self::STATUS_BILL, self::STATUS_CANCEL]],
-            [['address', 'notes'], 'string'],
+            [['address', 'notes', 'payment_method', 'other_payment_method'], 'string'],
             [['user_id'], 'integer'],
             ['customer_type', 'default', 'value' => self::GUEST],
 			['customer_type', 'in', 'range' => [self::GUEST, self::USER]],
@@ -96,6 +105,8 @@ class Order extends \yii\db\ActiveRecord
             'email' => 'Email',
             'notes' => 'Notes',
             'status' => 'Status',
+            'payment_method' => 'Hình thức thanh toán',
+            'other_payment_method' => 'Hình thức thanh toán khác',
         ];
     }
 

@@ -21,7 +21,7 @@ class OrderSearch extends Order
     {
         return [
             [['id',  'created_at', 'updated_at', 'status'], 'integer'],
-            [['created_normal', 'updated_normal', 'customer_type', 'surname', 'name', 'country', 'region', 'city', 'address', 'zip_code', 'phone', 'email', 'notes'], 'safe'],
+            [['created_normal', 'updated_normal', 'customer_type', 'surname', 'name', 'country', 'region', 'city', 'address', 'zip_code', 'phone', 'email', 'notes', 'payment_method'], 'safe'],
         ];
     }
 

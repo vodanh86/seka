@@ -83,7 +83,7 @@ class UserController extends Controller
             $model->generateAuthKey();
             $model->setPassword($model["password"]);
             if ($model->save()) {
-                ActionLog::add('create user', Yii::$app->user->identity->username);
+                ActionLog::add('create user: '.$model->username, Yii::$app->user->identity->username);
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         }
@@ -110,7 +110,7 @@ class UserController extends Controller
             $model->setPassword($model["password"]);
             if($model->save()) 
             {
-            ActionLog::add('udate user', Yii::$app->user->identity->username);
+            ActionLog::add('udate user: '.$model->username, Yii::$app->user->identity->username);
             return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -129,7 +129,7 @@ class UserController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        ActionLog::add('delete user', Yii::$app->user->identity->username);
+        ActionLog::add('delete user: '.$model->username, Yii::$app->user->identity->username);
         return $this->redirect(['index']);
     }
 

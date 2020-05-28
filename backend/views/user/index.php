@@ -3,7 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use dosamigos\datepicker\DatePicker;
-
+use yii\helpers\ArrayHelper;
+use common\models\User;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -14,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    
+    <?php $users = ArrayHelper::map(User::find()->all(),'id', 'username') ?>
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
@@ -52,7 +53,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
 			    ]),
             ],
-			'username',
+            'username',
+            [
+                'attribute' => 'supporter',
+				'value' => function($model) use ($users){
+					return $users[$model["supporter"]];
+				}
+			],
             'email:email',
             [
                 'attribute' => 'role',
