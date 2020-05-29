@@ -89,7 +89,15 @@ $this->params['breadcrumbs'][] = $this->title;
 			}
 		],
 
-		['class' => 'yii\grid\ActionColumn'],
+		[
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{view} {update} {delete} {myButton}',  // the default buttons + your custom button
+            'buttons' => [
+                'myButton' => function($url, $model, $key) {     // render your custom button
+                    return Html::a('Xuất hoá đơn', ['order/pdf/'.$model["id"]], ['target'=>'_blank', 'class' => 'btn btn-success btn-xs', 'data-pjax' => 0]);
+                }
+            ]
+        ]
 	];
 	
 	// Renders a export dropdown menu

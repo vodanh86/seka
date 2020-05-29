@@ -123,9 +123,10 @@ $this->params['breadcrumbs'][] = $this->title;
 		<div class="col-md-4">
 		</div>
 	</div>
-
 	<?php
-	echo Html::submitButton('Search', ['class' => 'btn btn-primary']);
+	echo Html::submitButton('Search', ['class' => 'btn btn-primary', 'name' => 'submit', 'value' => 'search']);
+	echo "&nbsp;";
+	echo Html::submitButton('Export', ['class' => 'btn btn-primary', 'name' => 'submit', 'value' => 'export']);
 	/* ADD FORM FIELDS */
 	ActiveForm::end();
 	?>
