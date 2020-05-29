@@ -16,7 +16,6 @@ class CatalogController extends Controller
 	public function actionList()
 	{
 
-		echo var_dump(Yii::$app->request->post('created_at'));
 	    $prodQuery = Product::find()->where(['not',['quantity'=>0]]);
 		
 		//$selected_category = 'Electronics';
